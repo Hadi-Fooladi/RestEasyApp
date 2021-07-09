@@ -10,10 +10,21 @@ namespace RestEasyApp
 {
 	public partial class MainPage : ContentPage
 	{
+		private int Counter = 0;
+
 		public MainPage()
 		{
 			InitializeComponent();
+			Device.StartTimer(TimeSpan.FromSeconds(1), Count);
 		}
+
+		private bool Count()
+		{
+			lblHR.Text = $"{++Counter}";
+
+			return Counter < 10;
+		}
+
 
 		private void bExacerbation_OnClicked(object sender, EventArgs e)
 		{
