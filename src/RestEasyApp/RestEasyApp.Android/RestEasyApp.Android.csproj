@@ -85,7 +85,9 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Heart.png" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RestEasyApp\RestEasyApp.csproj">
       <Project>{3961F6D6-A5D4-4268-AA1A-7581DF38EE4D}</Project>
