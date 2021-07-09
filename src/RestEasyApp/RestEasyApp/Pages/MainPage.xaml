@@ -7,9 +7,20 @@
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*" />
-			<RowDefinition Height="3*" />
+			<RowDefinition Height="4*" />
+			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
 
 		<Image Grid.Row="0" Source="Logo.png" BackgroundColor="#00c1cb" />
+
+		<Grid Grid.Row="2" Margin="10" ColumnSpacing="10">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition />
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
+
+			<Button Grid.Column="0" Text="Exacerbation&#10;Details" BackgroundColor="#00c1cb" Clicked="bExacerbation_OnClicked" />
+			<Button Grid.Column="1" Text="Use and&#x0a;Export Tools" BackgroundColor="#00c1cb" Clicked="bUse_OnClicked" />
+		</Grid>
 	</Grid>
 </ContentPage>

@@ -14,5 +14,15 @@ namespace RestEasyApp
 		{
 			InitializeComponent();
 		}
+
+		private void bExacerbation_OnClicked(object sender, EventArgs e)
+		{
+			DisplayAlert("", "Exacerbation", "OK");
+		}
+
+		private void bUse_OnClicked(object sender, EventArgs e)
+		{
+			DisplayAlert("", "Use", "OK");
+		}
 	}
 }
