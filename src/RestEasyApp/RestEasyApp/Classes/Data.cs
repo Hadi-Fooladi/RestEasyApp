@@ -1,6 +1,6 @@
 ﻿using EasyTCP;
 
-namespace DeviceEmulator
+namespace RestEasyApp
 {
 	internal class Data
 	{

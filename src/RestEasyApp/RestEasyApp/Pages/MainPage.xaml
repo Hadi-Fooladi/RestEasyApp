@@ -49,13 +49,13 @@
             <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="Start">
                 <Image Source="Lungs.png" WidthRequest="50" Margin="0,0,10,0" />
                 <Label Text="RR:" FontAttributes="Bold" />
-                <Label Text="12 breaths/min" />
+                <Label x:Name="lblRR" Text="12 breaths/min" />
             </StackLayout>
 
             <StackLayout Grid.Row="2" Orientation="Horizontal" HorizontalOptions="Start">
                 <Image Source="O2.png" WidthRequest="50" Margin="0,0,10,0" />
                 <Label Text="SpO&#x2082;:" FontAttributes="Bold" />
-                <Label Text="99%" />
+                <Label x:Name="lblSPO2" Text="99%" />
             </StackLayout>
         </Grid>
 
