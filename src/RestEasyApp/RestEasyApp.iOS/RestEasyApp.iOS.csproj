@@ -137,6 +137,15 @@
     <BundleResource Include="Resources\Logo.png" />
   </ItemGroup>
   <ItemGroup>
+    <BundleResource Include="Resources\Alarm.png" />
+  </ItemGroup>
+  <ItemGroup>
     <BundleResource Include="Resources\Heart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Lungs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\O2.png" />
   </ItemGroup>
 </Project>
