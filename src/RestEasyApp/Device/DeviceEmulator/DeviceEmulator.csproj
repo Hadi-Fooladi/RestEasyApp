@@ -6,4 +6,8 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="HaFT.EasyTCP" Version="7.3.32" />
+  </ItemGroup>
+
 </Project>
