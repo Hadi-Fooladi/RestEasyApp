@@ -6,9 +6,47 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:local="clr-namespace:DeviceEmulator"
 	mc:Ignorable="d"
-	Title="MainWindow" Height="450" Width="800">
+	Title="Device Emulator"
+	Width="600" Height="400"
+	WindowStartupLocation="CenterScreen">
 
-	<Grid>
+	<Window.Resources>
+		<Style TargetType="TextBlock">
+			<Setter Property="FontSize" Value="24" />
+			<Setter Property="HorizontalAlignment" Value="Right" />
+			<Setter Property="VerticalAlignment" Value="Center" />
+			<Setter Property="Margin" Value="5,0" />
+		</Style>
+	
+		<Style TargetType="TextBox">
+			<Setter Property="FontSize" Value="24" />
+			<Setter Property="VerticalAlignment" Value="Center" />
+			<Setter Property="Margin" Value="5,0" />
+		</Style>
+	</Window.Resources>
 
-	</Grid>
+	<DockPanel>
+		<Button DockPanel.Dock="Bottom" FontSize="32" Margin="5" Click="bSend_OnClick">Send</Button>
+
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition />
+				<RowDefinition />
+				<RowDefinition />
+			</Grid.RowDefinitions>
+
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
+
+			<TextBlock Grid.Row="0" Grid.Column="0" Text="HR:" />
+			<TextBlock Grid.Row="1" Grid.Column="0" Text="RR:" />
+			<TextBlock Grid.Row="2" Grid.Column="0" Text="SPO2:" />
+
+			<TextBox Grid.Row="0" Grid.Column="1" Name="tbHR" />
+			<TextBox Grid.Row="1" Grid.Column="1" Name="tbRR" />
+			<TextBox Grid.Row="2" Grid.Column="1" Name="tbSPO2" />
+		</Grid>
+	</DockPanel>
 </Window>
