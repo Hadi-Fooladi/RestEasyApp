@@ -16,12 +16,15 @@
             <Setter Property="HorizontalAlignment" Value="Right" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="Margin" Value="5,0" />
+            <Setter Property="TextElement.Foreground" Value="#00c1cb" />
+            <Setter Property="TextElement.FontWeight" Value="Bold" />
         </Style>
 
         <Style TargetType="TextBox">
             <Setter Property="FontSize" Value="24" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="Margin" Value="5,0" />
+            <Setter Property="TextElement.Foreground" Value="#00c1cb" />
         </Style>
 
         <Style TargetType="Slider">
@@ -29,6 +32,11 @@
             <Setter Property="Margin" Value="5,0" />
             <Setter Property="IsSnapToTickEnabled" Value="True" />
             <Setter Property="TickFrequency" Value="1" />
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#00c1cb" />
+            <Setter Property="TextElement.Foreground" Value="White" />
         </Style>
 
     </Window.Resources>
@@ -51,7 +59,7 @@
 
             <TextBlock Grid.Row="0" Grid.Column="0" Text="HR:" />
             <TextBlock Grid.Row="1" Grid.Column="0" Text="RR:" />
-            <TextBlock Grid.Row="2" Grid.Column="0" Text="SPO2:" />
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="SpO&#x2082;:" />
 
             <TextBox Grid.Row="0" Grid.Column="2" x:Name="tbHR" Text="{Binding ElementName=sliderHR, Path=Value, Mode=TwoWay}" />
             <TextBox Grid.Row="1" Grid.Column="2" x:Name="tbRR" Text="{Binding ElementName=sliderRR, Path=Value, Mode=TwoWay}" />
