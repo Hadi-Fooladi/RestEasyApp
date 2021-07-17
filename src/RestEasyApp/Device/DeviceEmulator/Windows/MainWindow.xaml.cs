@@ -2,7 +2,6 @@
 using System.Net;
 using System.Windows;
 using System.Net.Sockets;
-
 using EasyTCP;
 
 namespace DeviceEmulator
@@ -13,7 +12,7 @@ namespace DeviceEmulator
 
 		private DataStream Stream;
 
-		public MainWindow()
+        public MainWindow()
 		{
 			InitializeComponent();
 
@@ -53,5 +52,6 @@ namespace DeviceEmulator
 				MessageBox.Show(ex.Message);
 			}
 		}
+
 	}
 }

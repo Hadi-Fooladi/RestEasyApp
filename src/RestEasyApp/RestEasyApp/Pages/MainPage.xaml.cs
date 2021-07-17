@@ -12,21 +12,12 @@ namespace RestEasyApp
 {
 	public partial class MainPage : ContentPage
 	{
-		//private int Counter = 0;
 		private DataStream Stream;
 
 		public MainPage()
 		{
 			InitializeComponent();
-			//Device.StartTimer(TimeSpan.FromSeconds(1), Count);
 		}
-
-		/*private bool Count()
-		{
-			lblHR.Text = $"{++Counter}";
-
-			return Counter < 10;
-		}*/
 
 		private void bExacerbation_OnClicked(object sender, EventArgs e)
 		{
@@ -48,9 +39,9 @@ namespace RestEasyApp
 		{
 			Device.BeginInvokeOnMainThread(() =>
 			{
-				lblHR.Text = $"{data.HR}";
-				lblRR.Text = $"{data.RR}";
-				lblSPO2.Text = $"{data.SPO2}";
+				lblHR.Text = $"{data.HR} bpm";
+				lblRR.Text = $"{data.RR} breaths/min";
+				lblSPO2.Text = $"{data.SPO2}%";
 			});
 		}
 

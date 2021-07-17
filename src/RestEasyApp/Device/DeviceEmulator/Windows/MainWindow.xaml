@@ -10,43 +10,59 @@
 	Width="600" Height="400"
 	WindowStartupLocation="CenterScreen">
 
-	<Window.Resources>
-		<Style TargetType="TextBlock">
-			<Setter Property="FontSize" Value="24" />
-			<Setter Property="HorizontalAlignment" Value="Right" />
-			<Setter Property="VerticalAlignment" Value="Center" />
-			<Setter Property="Margin" Value="5,0" />
-		</Style>
-	
-		<Style TargetType="TextBox">
-			<Setter Property="FontSize" Value="24" />
-			<Setter Property="VerticalAlignment" Value="Center" />
-			<Setter Property="Margin" Value="5,0" />
-		</Style>
-	</Window.Resources>
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="5,0" />
+        </Style>
 
-	<DockPanel>
-		<Button DockPanel.Dock="Bottom" FontSize="32" Margin="5" Click="bSend_OnClick">Send</Button>
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="5,0" />
+        </Style>
 
-		<Grid>
-			<Grid.RowDefinitions>
-				<RowDefinition />
-				<RowDefinition />
-				<RowDefinition />
-			</Grid.RowDefinitions>
+        <Style TargetType="Slider">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="5,0" />
+            <Setter Property="IsSnapToTickEnabled" Value="True" />
+            <Setter Property="TickFrequency" Value="1" />
+        </Style>
 
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition />
-			</Grid.ColumnDefinitions>
+    </Window.Resources>
 
-			<TextBlock Grid.Row="0" Grid.Column="0" Text="HR:" />
-			<TextBlock Grid.Row="1" Grid.Column="0" Text="RR:" />
-			<TextBlock Grid.Row="2" Grid.Column="0" Text="SPO2:" />
+    <DockPanel>
+        <Button DockPanel.Dock="Bottom" FontSize="32" Margin="5" Click="bSend_OnClick">Send</Button>
 
-			<TextBox Grid.Row="0" Grid.Column="1" Name="tbHR" />
-			<TextBox Grid.Row="1" Grid.Column="1" Name="tbRR" />
-			<TextBox Grid.Row="2" Grid.Column="1" Name="tbSPO2" />
-		</Grid>
-	</DockPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="HR:" />
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="RR:" />
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="SPO2:" />
+
+            <TextBox Grid.Row="0" Grid.Column="2" x:Name="tbHR" Text="{Binding ElementName=sliderHR, Path=Value, Mode=TwoWay}" />
+            <TextBox Grid.Row="1" Grid.Column="2" x:Name="tbRR" Text="{Binding ElementName=sliderRR, Path=Value, Mode=TwoWay}" />
+            <TextBox Grid.Row="2" Grid.Column="2" x:Name="tbSPO2" Text="{Binding ElementName=sliderSPO2, Path=Value, Mode=TwoWay}" />
+
+            <Slider Grid.Row="0" Grid.Column="1" Name="sliderHR" Minimum="0" Maximum="400" />
+            <Slider Grid.Row="1" Grid.Column="1" Name="sliderRR" Minimum="0" Maximum="60" />
+            <Slider Grid.Row="2" Grid.Column="1" Name="sliderSPO2" Minimum="0" Maximum="100" />
+
+        </Grid>
+    </DockPanel>
 </Window>
+    
+    
