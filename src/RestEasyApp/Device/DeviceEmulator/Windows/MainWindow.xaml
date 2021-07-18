@@ -8,7 +8,8 @@
 	mc:Ignorable="d"
 	Title="Device Emulator"
 	Width="600" Height="400"
-	WindowStartupLocation="CenterScreen">
+	WindowStartupLocation="CenterScreen"
+    Closing="OnWindowClosing">
 
     <Window.Resources>
         <Style TargetType="TextBlock">
@@ -43,7 +44,7 @@
 
     <DockPanel>
         <Button DockPanel.Dock="Bottom" FontSize="32" Margin="5" Click="bSend_OnClick">Send</Button>
-
+        
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition />
