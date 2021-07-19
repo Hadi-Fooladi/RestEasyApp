@@ -9,7 +9,8 @@
 	Title="Device Emulator"
 	Width="600" Height="400"
 	WindowStartupLocation="CenterScreen"
-    Closing="OnWindowClosing">
+    Closing="OnWindowClosing"
+    Loaded="WindowLoaded">
 
     <Window.Resources>
         <Style TargetType="TextBlock">

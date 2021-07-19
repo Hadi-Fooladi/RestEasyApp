@@ -17,9 +17,10 @@ namespace RestEasyApp
 		public MainPage()
 		{
 			InitializeComponent();
+			StartConnection();
 		}
 
-		private void bExacerbation_OnClicked(object sender, EventArgs e)
+		private void StartConnection()
 		{
 			try
 			{
@@ -47,7 +48,12 @@ namespace RestEasyApp
 
 		private void bUse_OnClicked(object sender, EventArgs e)
 		{
-			DisplayAlert("", "Use", "OK");
+			DisplayAlert("", "Use and Export Tools", "OK");
+		}
+
+		private void bExacerbation_OnClicked(object sender, EventArgs e)
+		{
+			Navigation.PushModalAsync(new ExacerbationPage());
 		}
 	}
 }

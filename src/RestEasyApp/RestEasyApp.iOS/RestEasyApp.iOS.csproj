@@ -148,4 +148,10 @@
   <ItemGroup>
     <BundleResource Include="Resources\O2.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Date.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Time.png" />
+  </ItemGroup>
 </Project>

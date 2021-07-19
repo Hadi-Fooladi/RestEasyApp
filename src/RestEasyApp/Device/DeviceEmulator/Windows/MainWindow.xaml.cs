@@ -35,6 +35,11 @@ namespace DeviceEmulator
 			}
 		}
 
+		private void WindowLoaded(object sender, RoutedEventArgs e)
+		{
+			MessageBox.Show("Loaded");
+		}
+
 		private void timer_Tick(object sender, EventArgs e)
         {
 			try
@@ -62,7 +67,7 @@ namespace DeviceEmulator
 
 				MessageBox.Show("Connected");
 
-				// Setting a timer for 1 minute
+				// Setting the timer for 1 minute
 				timer.Interval = TimeSpan.FromMinutes(1);
 				timer.Tick += timer_Tick;
 
