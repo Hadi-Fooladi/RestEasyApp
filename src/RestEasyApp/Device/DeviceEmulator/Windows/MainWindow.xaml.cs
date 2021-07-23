@@ -14,15 +14,38 @@ namespace DeviceEmulator
 
 		private DataStream Stream;
 
-		private DispatcherTimer timer = new DispatcherTimer();
+		private readonly DispatcherTimer timer = new DispatcherTimer();
 
 		public MainWindow()
 		{
 			InitializeComponent();
 
+			// Setting the timer for 1 minute
+			timer.Interval = TimeSpan.FromSeconds(1);
+			timer.Tick += timer_Tick;
+
 			Listener.Start();
 
 			Loop();
+		}
+
+		private void SendData()
+		{
+			try
+			{
+				var data = new Data
+				{
+					HR = float.Parse(tbHR.Text),
+					RR = float.Parse(tbRR.Text),
+					SPO2 = float.Parse(tbSPO2.Text)
+				};
+
+				Stream?.Send(data);
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+			}
 		}
 
 		public void OnWindowClosing(object sender, CancelEventArgs e)
@@ -42,21 +65,7 @@ namespace DeviceEmulator
 
 		private void timer_Tick(object sender, EventArgs e)
         {
-			try
-			{
-				var data = new Data
-				{
-					HR = float.Parse(tbHR.Text),
-					RR = float.Parse(tbRR.Text),
-					SPO2 = float.Parse(tbSPO2.Text)
-				};
-
-				Stream?.Send(data);
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message);
-			}
+			SendData();
 		}
 
 		private async void Loop()
@@ -67,10 +76,6 @@ namespace DeviceEmulator
 
 				MessageBox.Show("Connected");
 
-				// Setting the timer for 1 minute
-				timer.Interval = TimeSpan.FromMinutes(1);
-				timer.Tick += timer_Tick;
-
 				// Start the timer
 				timer.Start();
 
@@ -80,25 +85,5 @@ namespace DeviceEmulator
 				Stream.Connect(client);
 			}
 		}
-
-		private void bSend_OnClick(object sender, RoutedEventArgs e)
-		{
-			try
-			{
-				var data = new Data
-				{
-					HR = float.Parse(tbHR.Text),
-					RR = float.Parse(tbRR.Text),
-					SPO2 = float.Parse(tbSPO2.Text)
-				};
-
-				Stream?.Send(data);
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message);
-			}
-		}
-
 	}
 }
