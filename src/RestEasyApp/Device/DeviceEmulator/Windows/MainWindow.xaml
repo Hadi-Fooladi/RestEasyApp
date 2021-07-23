@@ -44,7 +44,7 @@
     </Window.Resources>
 
     <DockPanel>
-        <Button DockPanel.Dock="Bottom" FontSize="32" Margin="5" Click="bSend_OnClick">Send</Button>
+        <Button DockPanel.Dock="Bottom" FontSize="32" Margin="5" Click="bConnect_OnClick">Connect</Button>
         
         <Grid>
             <Grid.RowDefinitions>

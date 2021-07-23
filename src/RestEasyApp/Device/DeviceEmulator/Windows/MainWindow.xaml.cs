@@ -10,19 +10,16 @@ namespace DeviceEmulator
 {
 	public partial class MainWindow
 	{
-		private readonly TcpListener Listener = new TcpListener(IPAddress.Any, 4689);
-
 		private DataStream Stream;
 
-		private DispatcherTimer timer = new DispatcherTimer();
+		private readonly DispatcherTimer timer = new DispatcherTimer();
 
 		public MainWindow()
 		{
 			InitializeComponent();
 
-			Listener.Start();
-
-			Loop();
+			timer.Interval = TimeSpan.FromMinutes(1);
+			timer.Tick += timer_Tick;
 		}
 
 		public void OnWindowClosing(object sender, CancelEventArgs e)
@@ -41,7 +38,7 @@ namespace DeviceEmulator
 		}
 
 		private void timer_Tick(object sender, EventArgs e)
-        {
+		{
 			try
 			{
 				var data = new Data
@@ -59,40 +56,16 @@ namespace DeviceEmulator
 			}
 		}
 
-		private async void Loop()
-		{
-			for (;;)
-			{
-				var client = await Listener.AcceptTcpClientAsync();
-
-				MessageBox.Show("Connected");
-
-				// Setting the timer for 1 minute
-				timer.Interval = TimeSpan.FromMinutes(1);
-				timer.Tick += timer_Tick;
-
-				// Start the timer
-				timer.Start();
-
-				MessageBox.Show("Starting Timer");
-
-				Stream = new DataStream();
-				Stream.Connect(client);
-			}
-		}
-
-		private void bSend_OnClick(object sender, RoutedEventArgs e)
+		private void bConnect_OnClick(object sender, RoutedEventArgs e)
 		{
 			try
 			{
-				var data = new Data
-				{
-					HR = float.Parse(tbHR.Text),
-					RR = float.Parse(tbRR.Text),
-					SPO2 = float.Parse(tbSPO2.Text)
-				};
+				var client = new TcpClient("127.0.0.1", 4689);
 
-				Stream?.Send(data);
+				Stream = new DataStream();
+				Stream.Connect(client);
+
+				timer.Start();
 			}
 			catch (Exception ex)
 			{

@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
+
 using EasyTCP;
 using Xamarin.Forms;
 
@@ -17,15 +13,15 @@ namespace RestEasyApp
 		public MainPage()
 		{
 			InitializeComponent();
-			StartConnection();
+			Global.Server.Connected += Server_Connected;
 		}
 
-		private void StartConnection()
+		private void Server_Connected(object sender, TcpClient client)
 		{
 			try
 			{
 				Stream = new DataStream();
-				Stream.Connect(new TcpClient("10.0.2.2", 4689));
+				Stream.Connect(client);
 
 				Stream.DataReceived += Stream_DataReceived;
 			}
@@ -33,7 +29,6 @@ namespace RestEasyApp
 			{
 				DisplayAlert("Error", ex.Message, "OK");
 			}
-
 		}
 
 		private void Stream_DataReceived(Data data)
