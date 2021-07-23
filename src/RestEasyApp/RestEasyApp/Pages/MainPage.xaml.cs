@@ -17,8 +17,6 @@ namespace RestEasyApp
 		public MainPage()
 		{
 			InitializeComponent();
-
-			StartConnection();
 		}
 
 		protected override void OnAppearing()
@@ -68,9 +66,9 @@ namespace RestEasyApp
 			});
 		}
 
-		private void bUse_OnClicked(object sender, EventArgs e)
+		private void bConnect_OnClicked(object sender, EventArgs e)
 		{
-			DisplayAlert("", "Use and Export Tools", "OK");
+			StartConnection();
 		}
 
 		private void bExacerbation_OnClicked(object sender, EventArgs e)

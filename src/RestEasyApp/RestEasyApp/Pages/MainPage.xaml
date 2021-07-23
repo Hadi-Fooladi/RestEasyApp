@@ -65,7 +65,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0" Text="Exacerbation&#10;Details" Clicked="bExacerbation_OnClicked" />
-            <Button Grid.Column="1" Text="Use and&#x0a;Export Tools" Clicked="bUse_OnClicked" />
+            <Button Grid.Column="1" Text="Connect" Clicked="bConnect_OnClicked" />
         </Grid>
     </Grid>
 </ContentPage>
