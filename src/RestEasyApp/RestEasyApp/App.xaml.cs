@@ -10,6 +10,8 @@ namespace RestEasyApp
 		{
 			InitializeComponent();
 
+			Global.Init();
+
 			MainPage = new MainPage();
 		}
 

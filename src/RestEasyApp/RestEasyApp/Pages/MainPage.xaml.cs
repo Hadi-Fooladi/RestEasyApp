@@ -17,7 +17,23 @@ namespace RestEasyApp
 		public MainPage()
 		{
 			InitializeComponent();
+
 			StartConnection();
+		}
+
+		protected override void OnAppearing()
+		{
+
+			var sb = new StringBuilder();
+			foreach (var data in Global.Database.AllData)
+			{
+				sb.AppendLine($"{data.Date}: {data.HR}");
+			}
+
+			DisplayAlert("", sb.ToString(), "OK");
+
+			base.OnAppearing();
+
 		}
 
 		private void StartConnection()
@@ -38,6 +54,12 @@ namespace RestEasyApp
 
 		private void Stream_DataReceived(Data data)
 		{
+			Global.Database.Add(new DB.Data
+			{
+				HR = data.HR,
+				Date = DateTime.Now
+			});
+
 			Device.BeginInvokeOnMainThread(() =>
 			{
 				lblHR.Text = $"{data.HR} bpm";
