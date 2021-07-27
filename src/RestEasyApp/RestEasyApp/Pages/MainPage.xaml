@@ -30,7 +30,7 @@
 
         <StackLayout Grid.Row="1" Orientation="Vertical" HorizontalOptions="Center">
             <Image Source="Alarm.png" WidthRequest="100" Margin="0,20,0,0" />
-            <Label Text="Last alarm: June 10, 2020&#10;at 2:12 AM" HorizontalTextAlignment="Center"/>
+			<Label x:Name="lblAlarm" Text="Last alarm: June 10, 2020&#10;at 2:12 AM" HorizontalTextAlignment="Center"/>
         </StackLayout>
 
         <Grid Grid.Row="2" HorizontalOptions="Center">

@@ -54,13 +54,13 @@ namespace DeviceEmulator
 			if (timer.IsEnabled)
 			{
 				timer.Stop();
-				MessageBox.Show("Stopping Timer");
+				//MessageBox.Show("Stopping Timer");
 			}
 		}
 
 		private void WindowLoaded(object sender, RoutedEventArgs e)
 		{
-			MessageBox.Show("Loaded");
+			//MessageBox.Show("Loaded");
 		}
 
 		private void timer_Tick(object sender, EventArgs e)
@@ -74,12 +74,12 @@ namespace DeviceEmulator
 			{
 				var client = await Listener.AcceptTcpClientAsync();
 
-				MessageBox.Show("Connected");
+				//MessageBox.Show("Connected");
 
 				// Start the timer
 				timer.Start();
 
-				MessageBox.Show("Starting Timer");
+				//MessageBox.Show("Starting Timer");
 
 				Stream = new DataStream();
 				Stream.Connect(client);

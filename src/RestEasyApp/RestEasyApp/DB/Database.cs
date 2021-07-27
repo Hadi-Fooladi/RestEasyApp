@@ -18,6 +18,10 @@ namespace RestEasyApp.DB
 
 		public void Add(Data data) => Con.Insert(data);
 
+		public Data GetLatestData => Con.Table<Data>().OrderByDescending(x => x.Date).FirstOrDefault();
+
+		public Data GetLastAlarm => Con.Table<Data>().Where(s => s.Alarm == true).OrderByDescending(x => x.Date).FirstOrDefault();
+
 		public IEnumerable<Data> AllData => Con.Table<Data>();
 	}
 }
