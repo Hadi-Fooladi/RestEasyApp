@@ -13,18 +13,19 @@
   <ItemGroup>
     <PackageReference Include="HaFT.EasyTCP" Version="7.3.32" />
     <PackageReference Include="sqlite-net-pcl" Version="1.7.335" />
+    <PackageReference Include="Xam.Plugins.Notifier" Version="3.0.1" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2083" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Pages\ExacerbationPage.xaml.cs">
-      <DependentUpon>ExacerbationPage.xaml</DependentUpon>
+    <Compile Update="Pages\AlarmPage.xaml.cs">
+      <DependentUpon>AlarmPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Pages\ExacerbationPage.xaml">
+    <EmbeddedResource Update="Pages\AlarmPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

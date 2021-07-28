@@ -2,7 +2,7 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="RestEasyApp.ExacerbationPage">
+    x:Class="RestEasyApp.AlarmPage">
 
     <ContentPage.Resources>
         <Style TargetType="Label">
@@ -22,7 +22,7 @@
 
         <Image Grid.Row="0" Source="Logo.png" BackgroundColor="#00c1cb" />
 
-        <Label Grid.Row="1" Text="Exacerbation Details" FontAttributes="Bold" FontSize="Large" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+        <Label Grid.Row="1" Text="Last Alarm Details" FontAttributes="Bold" FontSize="Large" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
 
         <Grid Grid.Row="2" HorizontalOptions="Center">
             <Grid.RowDefinitions>

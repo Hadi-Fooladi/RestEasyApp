@@ -29,7 +29,7 @@
         <Image Grid.Row="0" Source="Logo.png" BackgroundColor="#00c1cb" />
 
         <StackLayout Grid.Row="1" Orientation="Vertical" HorizontalOptions="Center">
-            <Image Source="Alarm.png" WidthRequest="100" Margin="0,20,0,0" />
+            <ImageButton Source="Alarm.png" WidthRequest="100" Margin="0,20,0,0" Clicked="BAlarm_OnClicked" BackgroundColor="Transparent"/>
 			<Label x:Name="lblAlarm" Text="Last alarm: June 10, 2020&#10;at 2:12 AM" HorizontalTextAlignment="Center"/>
         </StackLayout>
 
@@ -64,8 +64,8 @@
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Text="Exacerbation&#10;Details" Clicked="bExacerbation_OnClicked" />
-            <Button Grid.Column="1" Text="Connect" Clicked="bConnect_OnClicked" />
+            <Button Grid.Column="0" Text="Exacerbation&#10;Details" Clicked="BExacerbation_OnClicked" />
+            <Button Grid.Column="1" Text="Connect" Clicked="BConnect_OnClicked" />
         </Grid>
     </Grid>
 </ContentPage>

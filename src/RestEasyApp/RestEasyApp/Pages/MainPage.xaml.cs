@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Net.Sockets;
-using System.Text;
 using EasyTCP;
+using Plugin.LocalNotifications;
 using Xamarin.Forms;
-
 
 namespace RestEasyApp
 {
 	public partial class MainPage : ContentPage
 	{
 		private DataStream Stream;
+		private const int minHR = 60, maxHR = 100, minRR = 12, maxRR = 20, minSPO2 = 95;
+		private bool notificationSent = false;
 
 		public MainPage()
 		{
@@ -19,7 +20,7 @@ namespace RestEasyApp
 
 		protected override void OnAppearing()
 		{
-			var sb = new StringBuilder();
+			/*var sb = new StringBuilder();
 			foreach (var data in Global.Database.AllData)
 			{
 				sb.AppendLine($"{data.Date}, HR = {data.HR}, RR = {data.RR}, SPO2 = {data.SPO2}, Alarm: {data.Alarm}");
@@ -27,8 +28,9 @@ namespace RestEasyApp
 
 			DisplayAlert("", sb.ToString(), "OK");
 
-			base.OnAppearing();
+			base.OnAppearing();*/
 		}
+
 		private void StartConnection()
 		{
 			try
@@ -46,26 +48,44 @@ namespace RestEasyApp
 		}
 		private void RetrieveData()
 		{
-			lblHR.Text = $"{Global.Database.GetLatestData.HR} bpm";
-			lblRR.Text = $"{Global.Database.GetLatestData.RR} breaths/min";
-			lblSPO2.Text = $"{Global.Database.GetLatestData.SPO2}%";
+			if (Global.Database.DataExists)
+			{
+				lblHR.Text = $"{Global.Database.GetLatestData.HR} bpm";
+				lblRR.Text = $"{Global.Database.GetLatestData.RR} breaths/min";
+				lblSPO2.Text = $"{Global.Database.GetLatestData.SPO2}%";
 
-			lblAlarm.Text = Format_Time(Global.Database.GetLastAlarm.Date.Year,
-										Global.Database.GetLastAlarm.Date.Month,
-										Global.Database.GetLastAlarm.Date.Day,
-										Global.Database.GetLastAlarm.Date.Hour,
-										Global.Database.GetLastAlarm.Date.Minute);
+				if (Global.Database.AlarmExists) {
+					lblAlarm.Text = Format_Time(Global.Database.GetLastAlarm.Date.Year,
+												Global.Database.GetLastAlarm.Date.Month,
+												Global.Database.GetLastAlarm.Date.Day,
+												Global.Database.GetLastAlarm.Date.Hour,
+												Global.Database.GetLastAlarm.Date.Minute);
+				}
+			}
 		}
 
 		private void SetAlarm()
 		{
-			if(Global.Database.GetLatestData.HR < 60 || Global.Database.GetLatestData.HR > 100 || Global.Database.GetLatestData.RR < 12 || Global.Database.GetLatestData.RR > 20 || Global.Database.GetLatestData.SPO2 < 95)
+			if (Global.Database.GetLatestData.HR < minHR || Global.Database.GetLatestData.HR > maxHR || Global.Database.GetLatestData.RR < minRR || Global.Database.GetLatestData.RR > maxRR || Global.Database.GetLatestData.SPO2 < minSPO2)
 			{
 				lblAlarm.Text = Format_Time(Global.Database.GetLatestData.Date.Year,
 											Global.Database.GetLatestData.Date.Month,
 											Global.Database.GetLatestData.Date.Day,
 											Global.Database.GetLatestData.Date.Hour,
 											Global.Database.GetLatestData.Date.Minute);
+
+				if (!notificationSent)
+				{
+					int id = 0;
+					string title = "Exacerbation Alert";
+					string body = $"Time: {Global.Database.GetLastAlarm.Date}, " +
+										$"HR: {Global.Database.GetLastAlarm.HR}, " +
+										$"RR: {Global.Database.GetLastAlarm.RR}, " +
+										$"SPO2: {Global.Database.GetLastAlarm.SPO2}";
+
+					CrossLocalNotifications.Current.Show(title, body, id);
+					notificationSent = true;
+				}
 			}
 		}
 
@@ -90,7 +110,7 @@ namespace RestEasyApp
 			}
 
 			int hour;
-			String AMorPM;
+			string AMorPM;
 			if (Hour > 12)
 			{
 				hour = Hour - 12;
@@ -103,7 +123,7 @@ namespace RestEasyApp
 				AMorPM = "AM";
 			}
 
-			String zero = "";
+			string zero = "";
 			if (Minute < 10)
 				zero = "0";
 
@@ -112,10 +132,15 @@ namespace RestEasyApp
 		private void Stream_DataReceived(Data data)
 		{
 			bool alarm;
-			if (data.HR < 60 || data.HR > 100 || data.RR < 12 || data.RR > 20 || data.SPO2 < 95)
+			if (data.HR < minHR || data.HR > maxHR || data.RR < minRR || data.RR > maxRR || data.SPO2 < minSPO2)
+			{
 				alarm = true;
+			}
 			else
+			{
 				alarm = false;
+				notificationSent = false;
+			}
 
 			Global.Database.Add(new DB.Data
 			{
@@ -136,14 +161,18 @@ namespace RestEasyApp
 			SetAlarm();
 		}
 
-		private void bConnect_OnClicked(object sender, EventArgs e)
+		private void BConnect_OnClicked(object sender, EventArgs e)
 		{
 			StartConnection();
 		}
 
-		private void bExacerbation_OnClicked(object sender, EventArgs e)
+		private void BExacerbation_OnClicked(object sender, EventArgs e)
 		{
-			Navigation.PushModalAsync(new ExacerbationPage());
+
+		}
+		private void BAlarm_OnClicked(object sender, EventArgs e)
+		{
+			Navigation.PushModalAsync(new AlarmPage());
 		}
 	}
 }
