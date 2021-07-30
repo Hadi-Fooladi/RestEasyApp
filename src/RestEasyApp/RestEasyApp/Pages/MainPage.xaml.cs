@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Sockets;
 using EasyTCP;
 using Plugin.LocalNotifications;
@@ -54,81 +55,48 @@ namespace RestEasyApp
 				lblRR.Text = $"{Global.Database.GetLatestData.RR} breaths/min";
 				lblSPO2.Text = $"{Global.Database.GetLatestData.SPO2}%";
 
-				if (Global.Database.AlarmExists) {
-					lblAlarm.Text = Format_Time(Global.Database.GetLastAlarm.Date.Year,
-												Global.Database.GetLastAlarm.Date.Month,
-												Global.Database.GetLastAlarm.Date.Day,
-												Global.Database.GetLastAlarm.Date.Hour,
-												Global.Database.GetLastAlarm.Date.Minute);
-				}
+				if (Global.Database.AlarmExists)
+					lblAlarm.Text = $"Last alarm: {Format_Time(Global.Database.GetLatestData.Date)}";
 			}
 		}
 
 		private void SetAlarm()
 		{
-			if (Global.Database.GetLatestData.HR < minHR || Global.Database.GetLatestData.HR > maxHR || Global.Database.GetLatestData.RR < minRR || Global.Database.GetLatestData.RR > maxRR || Global.Database.GetLatestData.SPO2 < minSPO2)
+			var latestData = Global.Database.GetLatestData;
+			if (Global.Database.GetLatestData.Alarm)
 			{
-				lblAlarm.Text = Format_Time(Global.Database.GetLatestData.Date.Year,
-											Global.Database.GetLatestData.Date.Month,
-											Global.Database.GetLatestData.Date.Day,
-											Global.Database.GetLatestData.Date.Hour,
-											Global.Database.GetLatestData.Date.Minute);
+
+				lblAlarm.Text = $"Last alarm: {Format_Time(latestData.Date)}";
 
 				if (!notificationSent)
 				{
 					int id = 0;
 					string title = "Exacerbation Alert";
-					string body = $"Time: {Global.Database.GetLastAlarm.Date}, " +
-										$"HR: {Global.Database.GetLastAlarm.HR}, " +
-										$"RR: {Global.Database.GetLastAlarm.RR}, " +
-										$"SPO2: {Global.Database.GetLastAlarm.SPO2}";
+					string body = string.Join(", ", GetLines());
 
 					CrossLocalNotifications.Current.Show(title, body, id);
 					notificationSent = true;
+
+					imgAlarm.Source = "AlarmRed.png";
+
+
+					IEnumerable<string> GetLines()
+					{
+						var alarm = Global.Database.GetLastAlarm;
+						yield return $"Time: {alarm.Date}";
+						yield return $"HR: {alarm.HR}";
+						yield return $"RR: {alarm.RR}";
+						yield return $"SPO2: {alarm.SPO2}";
+					}
 				}
 			}
 		}
 
-		private string Format_Time(int Year, int Month, int Day, int Hour, int Minute)
+		private static string Format_Time(DateTime date)
 		{
-			string month = "";
-			switch (Month)
-			{
-				case 1: month = "January"; break;
-				case 2: month = "February"; break;
-				case 3: month = "March"; break;
-				case 4: month = "April"; break;
-				case 5: month = "May"; break;
-				case 6: month = "June"; break;
-				case 7: month = "July"; break;
-				case 8: month = "August"; break;
-				case 9: month = "September"; break;
-				case 10: month = "October"; break;
-				case 11: month = "November"; break;
-				case 12: month = "December"; break;
-				default: break;
-			}
-
-			int hour;
-			string AMorPM;
-			if (Hour > 12)
-			{
-				hour = Hour - 12;
-				AMorPM = "PM";
-			}
-			else
-			{
-				if (Hour == 0) hour = 12;
-				else hour = Hour;
-				AMorPM = "AM";
-			}
-
-			string zero = "";
-			if (Minute < 10)
-				zero = "0";
-
-			return $"Last alarm: {month} {Day}, {Year}\nat {hour}:{zero}{Minute} {AMorPM}";
+			return $"{date: MMMM dd, yyyy\nhh:mm tt}";
 		}
+
 		private void Stream_DataReceived(Data data)
 		{
 			bool alarm;

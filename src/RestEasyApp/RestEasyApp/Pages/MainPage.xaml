@@ -29,7 +29,7 @@
         <Image Grid.Row="0" Source="Logo.png" BackgroundColor="#00c1cb" />
 
         <StackLayout Grid.Row="1" Orientation="Vertical" HorizontalOptions="Center">
-            <ImageButton Source="Alarm.png" WidthRequest="100" Margin="0,20,0,0" Clicked="BAlarm_OnClicked" BackgroundColor="Transparent"/>
+            <ImageButton x:Name="imgAlarm" Source="Alarm.png" WidthRequest="100" Margin="0,20,0,0" Clicked="BAlarm_OnClicked" BackgroundColor="Transparent"/>
 			<Label x:Name="lblAlarm" Text="Last alarm: June 10, 2020&#10;at 2:12 AM" HorizontalTextAlignment="Center"/>
         </StackLayout>
 
