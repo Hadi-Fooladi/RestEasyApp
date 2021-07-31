@@ -117,16 +117,15 @@ namespace RestEasyApp
 				SPO2 = data.SPO2,
 				Date = DateTime.Now,
 				Alarm = alarm
-			}); ;
+			});
 
 			Device.BeginInvokeOnMainThread(() =>
 			{
 				lblHR.Text = $"{data.HR} bpm";
 				lblRR.Text = $"{data.RR} breaths/min";
 				lblSPO2.Text = $"{data.SPO2}%";
+				SetAlarm();
 			});
-
-			SetAlarm();
 		}
 
 		private void BConnect_OnClicked(object sender, EventArgs e)
